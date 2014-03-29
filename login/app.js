@@ -7,7 +7,19 @@
 
 var express = require('express');
 var http = require('http');
+// var sendgrid  = require('sendgrid')(rswang, hackprinceton);
 var app = express();
+// var payload   = {
+//   to      : 'rachelwang1994@gmail.com',
+//   from    : 'rswang@mit.edu',
+//   subject : 'Saying Hi',
+//   text    : 'This is my first email through SendGrid'
+// }
+// sendgrid.send(payload, function(err, json) {
+//   if (err) { console.error(err); }
+//   console.log(json);
+// });
+
 
 app.configure(function(){
 	app.set('port', 8080);
@@ -22,7 +34,28 @@ app.configure(function(){
 	app.use(express.methodOverride());
 	app.use(require('stylus').middleware({ src: __dirname + '/app/public' }));
 	app.use(express.static(__dirname + '/app/public'));
+	});
+
+
+app.post('/uploadimg', function(req,res){
+  fs.readFile(req.files.image.path, function(err,data){
+    var imageName = req.files.image.name;
+
+    if (!imageName){
+    	console.log("Error");
+    	res.redirect('/');
+    	res.end();
+
+    }
+    var newPath = __dirname+ "uploads/fullsize/" + imageName;
+
+    fs.writeFile(newPath, data, function (err){
+    	res.redirect("/uploads/fullsize/" + imageName);
+    });
+  });
+
 });
+
 
 app.configure('development', function(){
 	app.use(express.errorHandler());

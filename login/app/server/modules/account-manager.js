@@ -103,34 +103,16 @@ exports.updateAccount = function(newData, callback)
 			});
 		}
 	});
-
 }
 
 exports.updateMenu = function(newData, callback)
 {
 	accounts.findOne({user:newData.user}, function(e, o){
-		o.name 		= newData.name;
-		o.email 	= newData.email;
-		o.restname	= newData.restname;
-		o.address	= newData.address;
-		o.city		= newData.city
-		o.state		= newData.state;
-		o.zip		= newData.zip;
-		o.country 	= newData.country;
-		if (newData.pass == ''){
-			accounts.save(o, {safe: true}, function(err) {
-				if (err) callback(err);
-				else callback(null, o);
-			});
-		}	else{
-			saltAndHash(newData.pass, function(hash){
-				o.pass = hash;
-				accounts.save(o, {safe: true}, function(err) {
-					if (err) callback(err);
-					else callback(null, o);
-				});
-			});
-		}
+		o.restid 	= newData.restid;
+		o.dish 		= newData.dish;
+		o.type		= newData.type;
+		o.tags		= newData.tags;
+		o.allergies = newData.allergies;
 	});
 }
 
@@ -170,6 +152,15 @@ exports.validateResetLink = function(email, passHash, callback)
 exports.getAllRecords = function(callback)
 {
 	accounts.find().toArray(
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+};
+
+exports.getAllDishes = function(callback)
+{
+	menu.find().toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)

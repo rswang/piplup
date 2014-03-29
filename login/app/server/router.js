@@ -1,5 +1,6 @@
 
 var CT = require('./modules/country-list');
+var DT = require('./modules/dish-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
@@ -84,6 +85,30 @@ module.exports = function(app) {
 			res.clearCookie('user');
 			res.clearCookie('pass');
 			req.session.destroy(function(e){ res.send('ok', 200); });
+		}
+	});
+
+	app.get('/menu', function(req, res) {
+	    if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+	        res.redirect('/');
+	    }   else{
+			res.render('menu', {
+				title : 'Control Panel',
+				dishes : DT,
+				udata : req.session.user
+			});
+	    }
+	});
+	
+	app.post('/menu', function(req, res){
+		if (req.param('user') != undefined) {
+			AM.updateMenu({
+				dish 		: req.param('dish'),
+				type 		: req.param('type'),
+				tags 		: req.param('tags'),
+				allergies 	: req.param('allergies')
+			})
 		}
 	});
 	
@@ -175,18 +200,10 @@ module.exports = function(app) {
 	});
 	
 	app.get('/filter', function(req, res) {
-		AM.getAllRecords( function(e, menu){
-			res.render('filter', { title : 'Account List', accts : menu });
+		AM.getAllDishes( function(e, menu){
+			res.render('filter', { title : 'Menu List', menus : menu });
 		})
 	});
-
-
-	app.get('/menu', function(req, res) {
-		AM.getAllRecords( function(e, accounts){
-			res.render('filter', { title : 'Account List', accts : accounts });
-		})
-	});
-	
 
 	app.post('/delete', function(req, res){
 		AM.deleteAccount(req.body.id, function(e, obj){
@@ -207,5 +224,25 @@ module.exports = function(app) {
 	});
 	
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
+
+	app.post('/uploadimg', function(req,res){
+	  fs.readFile(req.files.image.path, function(err,data){
+	    var imageName = req.param.dish;
+
+	    if (!imageName){
+	    	console.log("Error");
+	    	res.redirect('/');
+	    	res.end();
+
+	    }
+	    var newPath = __dirname+ "uploads/fullsize/" + imageName;
+
+	    fs.writeFile(newPath, data, function (err){
+	    	res.redirect("/uploads/fullsize/" + imageName);
+	    });
+	  });
+
+	});
+
 
 };

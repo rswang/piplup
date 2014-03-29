@@ -7,7 +7,7 @@ input(type='hidden', value= user._id)#userId
 #account-form-container
 	form( method="post")#account-form.form-horizontal.well.span6
 		h1
-		p#sub1.subheading Please tell us a little about your restaurant.
+		p#sub1.subheading Please enter a dish.
 		hr
 		fieldset
 			#name-cg.control-group
@@ -25,19 +25,19 @@ input(type='hidden', value= user._id)#userId
 			#address-cg.control-group
 				label.control-label(for='address-tf') Address
 				.controls
-					input#email-tf.input-xlarge(type='text', name='address', value= user.address)
+					input#address-tf.input-xlarge(type='text', name='address', value= user.address)
 			#city-cg.control-group
 				label.control-label(for='city-tf') City
 				.controls
-					input#email-tf.input-xlarge(type='text', name='city', value= user.city)
+					input#city-tf.input-xlarge(type='text', name='city', value= user.city)
 			#state-cg.control-group
 				label.control-label(for='state-tf') State
 				.controls
-					input#email-tf.input-xlarge(type='text', name='state', value= user.state)
+					input#state-tf.input-xlarge(type='text', name='state', value= user.state)
 			#zip-cg.control-group
 				label.control-label(for='zip-tf') Zip Code
 				.controls
-					input#email-tf.input-xlarge(type='text', name='zip', value= user.zip)
+					input#zip-tf.input-xlarge(type='text', name='zip', value= user.zip)
 			#clist-cg.control-group
 				label.control-label(for='country-list') Location
 				.controls

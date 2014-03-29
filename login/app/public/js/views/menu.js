@@ -1,10 +1,8 @@
 
 $(document).ready(function(){
 
-    var hc = new HomeController();
-    var av = new AccountValidator();
     
-    $('#account-form').ajaxForm({
+    $('#menu-form').ajaxForm({
         beforeSubmit : function(formData, jqForm, options){
             if (av.validateForm() == false){
                 return false;
@@ -30,13 +28,13 @@ $(document).ready(function(){
 
 // customize the account settings form //
     
-    $('#account-form h1').text('Account Settings');
-    $('#account-form #sub1').text('Here are the current settings for your account.');
+    $('#menu-form h1').text('Menu Settings');
+    $('#menu-form #sub1').text('Here are the current settings for your account.');
     $('#user-tf').attr('disabled', 'disabled');
-    $('#account-form-btn3').html('Menu');
-    $('#account-form-btn1').html('Delete');
-    $('#account-form-btn1').addClass('btn-danger');
-    $('#account-form-btn2').html('Update');
+    $('#menu-form-btn3').html('Menu');
+    $('#menu-form-btn1').html('Delete');
+    $('#menu-form-btn1').addClass('btn-danger');
+    $('#menu-form-btn2').html('Update');
 
 // setup the confirm window that displays when the user chooses to delete their account //
 

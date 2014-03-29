@@ -7,19 +7,11 @@ block content
             thead
                 tr
                     th(style='width:40px') ID
-                    th(style='width:180px') Name
-                    th(style='width:200px') Location
-                    th(style='width:180px') Username
-                    th(style='width:150px') Restaurant Name
-                    th(style='width:180px') Address
-                    th Account Created
+                    th(style='width:180px') Menu Item
+                    th(style='width:200px') Type
             tbody
-            - for (var i = 0; i < accts.length; i++)
+            - for (var i = 0; i < menus.length; i++)
                 tr
-                    td= i+1
-                    td= accts[i].restid
-                    td= accts[i].menu
-                    td= accts[i].user
-                    td= accts[i].restname
-                    td= accts[i].address
-                    td= accts[i].date
+                    td= menus[i]._id
+                    td= menus[i].name
+                    td= menus[i].type
