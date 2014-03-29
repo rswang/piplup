@@ -1,3 +1,13 @@
+@font-face
+	font-family "Quicksand-Regular"
+	src url('fonts/Quicksand-Regular.otf')
+
+@font-face 
+	font-family "Quicksand-Light"
+	src url('fonts/Quicksand-Light.otf')
+
+html
+	height 100%
 raiseText()
 	color grey
 	text-shadow: -1px 1px 0 white
@@ -5,6 +15,7 @@ raiseText()
 	-webkit-text-shadow: -1px 1px 0 white
 
 body 
+	font-family "Quicksand-Light"
 	margin  0
 	padding  0
 	height  100%
@@ -62,6 +73,23 @@ body
 .modal-form-errors li
 	raiseText()
 	color #D8000C
+
+// other pages
+#landing
+	height 100%
+	background-image url('bg.jpg')
+	background-size cover
+#logo
+	margin-top:300px
+	margin-left:10px
+	color:#fff
+#logo h1
+	font-size: 70px
+	text-shadow: 3px 3px #000
+	// text-font: 
+.btn
+	font-family "Quicksand-Light"
+
 
 // retrieve password window //
 

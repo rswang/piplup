@@ -1,4 +1,16 @@
+@font-face {
+  font-family: "Quicksand-Regular";
+  src: url("fonts/Quicksand-Regular.otf");
+}
+@font-face {
+  font-family: "Quicksand-Light";
+  src: url("fonts/Quicksand-Light.otf");
+}
+html {
+  height: 100%;
+}
 body {
+  font-family: "Quicksand-Light";
   margin: 0;
   padding: 0;
   height: 100%;
@@ -64,6 +76,21 @@ body {
   -moz-text-shadow: -1px 1px 0 #fff;
   -webkit-text-shadow: -1px 1px 0 #fff;
   color: #d8000c;
+}
+#landing {
+  height: 100%;
+  background-image: url("bg.jpg");
+  background-size: cover;
+}
+#logo {
+  margin-top: 300px;
+  margin-left: 10px;
+  color: #fff;
+}
+#logo h1 {
+  font-size: 70px;
+  text-shadow: 3px 3px #000;
+  font-family: "Quicksand-Light";
 }
 .modal-single-input {
   width: 452px;

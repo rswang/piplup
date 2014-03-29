@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    div#landing
+        div.span12#logo
+            h1 PLATE
+            br
+            form.form-inline
+                
+                input.form-control(placeholder="Zip code or restaurant")#searchbar
+                button.btn.btn-warning.btn-lg SEARCH
+    div.navbar.navbar-fixed-top#index
+        div.navbar-inner
+            div.container-fluid
+                button#btn-logout.btn.btn-primary
+                    i.icon-lock.icon-white
+                    | Sign Out

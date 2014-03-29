@@ -21,7 +21,7 @@
 		"mongodb": "1.2.7",
 		"moment" : "1.7.2",
 		"emailjs": "0.3.3",
-		 "sendgrid": "1.0.1"
+		"sendgrid": "1.0.1"
 
 	},
 	"engines": {

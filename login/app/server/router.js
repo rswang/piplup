@@ -11,6 +11,40 @@ module.exports = function(app) {
 	app.get('/', function(req, res){
 	// check if the user's credentials are saved in a cookie //
 		if (req.cookies.user == undefined || req.cookies.pass == undefined){
+			res.render('index', { title: 'Hello - Please Login To Your Account' });
+		}	else{
+	// attempt automatic login //
+			AM.autoLogin(req.cookies.user, req.cookies.pass, function(o){
+				if (o != null){
+				    req.session.user = o;
+					res.redirect('/home');
+				}	else{
+					res.render('login', { title: 'Hello - Please Login To Your Account' });
+				}
+			});
+		}
+	});
+
+	app.post('/', function(req, res){
+	// check if the user's credentials are saved in a cookie //
+		if (req.cookies.user == undefined || req.cookies.pass == undefined){
+			res.render('index', { title: 'Hello - Please Login To Your Account' });
+		}	else{
+	// attempt automatic login //
+			AM.autoLogin(req.cookies.user, req.cookies.pass, function(o){
+				if (o != null){
+				    req.session.user = o;
+					res.redirect('/home');
+				}	else{
+					res.render('login', { title: 'Hello - Please Login To Your Account' });
+				}
+			});
+		}
+	});
+
+	app.get('/login', function(req, res){
+	// check if the user's credentials are saved in a cookie //
+		if (req.cookies.user == undefined || req.cookies.pass == undefined){
 			res.render('login', { title: 'Hello - Please Login To Your Account' });
 		}	else{
 	// attempt automatic login //
@@ -25,7 +59,7 @@ module.exports = function(app) {
 		}
 	});
 	
-	app.post('/', function(req, res){
+	app.post('/login', function(req, res){
 		AM.manualLogin(req.param('user'), req.param('pass'), function(e, o){
 			if (!o){
 				res.send(e, 400);
@@ -45,7 +79,7 @@ module.exports = function(app) {
 	app.get('/home', function(req, res) {
 	    if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
-	        res.redirect('/');
+	        res.redirect('/login');
 	    }   else{
 			res.render('home', {
 				title : 'Control Panel',
@@ -91,7 +125,7 @@ module.exports = function(app) {
 	app.get('/menu', function(req, res) {
 	    if (req.session.user == null){
 	// if user is not logged-in redirect back to login page //
-	        res.redirect('/');
+	        res.redirect('/login');
 	    }   else{
 			res.render('menu', {
 				title : 'Control Panel',
@@ -167,7 +201,7 @@ module.exports = function(app) {
 		var passH = req.query["p"];
 		AM.validateResetLink(email, passH, function(e){
 			if (e != 'ok'){
-				res.redirect('/');
+				res.redirect('/login');
 			} else{
 	// save the user's email in a session instead of sending to the client //
 				req.session.reset = { email:email, passHash:passH };
@@ -231,7 +265,7 @@ module.exports = function(app) {
 
 	    if (!imageName){
 	    	console.log("Error");
-	    	res.redirect('/');
+	    	res.redirect('/login');
 	    	res.end();
 
 	    }
