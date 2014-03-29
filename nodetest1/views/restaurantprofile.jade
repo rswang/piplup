@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+    form#formEditRestaurant(name="editprofile",method="post",action="/editprofile")
+        input#inputUserName(type="text", placeholder="username", name="username")
+        input#inputRestName(type="text", placeholder="restaurant", name="restaurant")
+        input#inputAddress(type="text",placeholder="address", name="address")
+        input#inputCity(type="text", placeholder="city", name="city")
+        input#inputState(type="text", placeholder="state", name="state")
+        input#inputZip(type="text", placeholder="zip", name="zip")
+        button#btnSubmit(type="submit") submit

@@ -20,6 +20,8 @@ var app = express();
 app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -42,6 +44,9 @@ app.get('/restaurantlist', routes.restaurantlist(db));
 app.get('/newrestaurant', routes.newrestaurant);
 app.post('/addrestaurant', routes.addrestaurant(db));
 app.get('/menu', routes.menu);
+app.get('/restaurantprofile', routes.restaurantprofile);
+app.post('/editprofile', routes.editprofile(db));
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
