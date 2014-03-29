@@ -174,6 +174,20 @@ module.exports = function(app) {
 		})
 	});
 	
+	app.get('/filter', function(req, res) {
+		AM.getAllRecords( function(e, menu){
+			res.render('filter', { title : 'Account List', accts : menu });
+		})
+	});
+
+
+	app.get('/menu', function(req, res) {
+		AM.getAllRecords( function(e, accounts){
+			res.render('filter', { title : 'Account List', accts : accounts });
+		})
+	});
+	
+
 	app.post('/delete', function(req, res){
 		AM.deleteAccount(req.body.id, function(e, obj){
 			if (!e){

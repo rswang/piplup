@@ -6,7 +6,7 @@ var moment 		= require('moment');
 
 var dbPort 		= 27017;
 var dbHost 		= 'localhost';
-var dbName 		= 'node-login';
+var dbName 		= 'login';
 
 /* establish the database connection */
 
@@ -18,7 +18,10 @@ var db = new MongoDB(dbName, new Server(dbHost, dbPort, {auto_reconnect: true}),
 		console.log('connected to database :: ' + dbName);
 	}
 });
+/* restaurant users */
 var accounts = db.collection('accounts');
+/* menu items - dishes */
+var menu = db.collection('menu');
 
 /* login validation methods */
 
@@ -75,6 +78,35 @@ exports.addNewAccount = function(newData, callback)
 }
 
 exports.updateAccount = function(newData, callback)
+{
+	accounts.findOne({user:newData.user}, function(e, o){
+		o.name 		= newData.name;
+		o.email 	= newData.email;
+		o.restname	= newData.restname;
+		o.address	= newData.address;
+		o.city		= newData.city
+		o.state		= newData.state;
+		o.zip		= newData.zip;
+		o.country 	= newData.country;
+		if (newData.pass == ''){
+			accounts.save(o, {safe: true}, function(err) {
+				if (err) callback(err);
+				else callback(null, o);
+			});
+		}	else{
+			saltAndHash(newData.pass, function(hash){
+				o.pass = hash;
+				accounts.save(o, {safe: true}, function(err) {
+					if (err) callback(err);
+					else callback(null, o);
+				});
+			});
+		}
+	});
+
+}
+
+exports.updateMenu = function(newData, callback)
 {
 	accounts.findOne({user:newData.user}, function(e, o){
 		o.name 		= newData.name;
@@ -205,3 +237,6 @@ var findByMultipleFields = function(a, callback)
 		else callback(null, results)
 	});
 }
+
+/* menu methods */
+
