@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1.
+        Restaurant List
+
+    ul
+
+        each restaurant, i in restaurantlist
+            li. #{restaurant.username}
+            ul
+                li.
+                    Email = #{restaurant.email}
+                li. 
+                    Password = #{restaurant.password}
