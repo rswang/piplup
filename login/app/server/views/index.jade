@@ -5,13 +5,15 @@ block content
         div.span12#logo
             h1 PLATE
             br
-            form.form-inline
-                
-                input.form-control(placeholder="Zip code or restaurant")#searchbar
+            form(method="post").form-inline
+                input.form-control(placeholder="Zip code or restaurant", type='text', name='search')#searchbar
                 button.btn.btn-warning.btn-lg SEARCH
     div.navbar.navbar-fixed-top#index
         div.navbar-inner
             div.container-fluid
-                button#btn-logout.btn.btn-primary
-                    i.icon-lock.icon-white
-                    | Sign Out
+                button#btn-logout.btn.btn-warning
+                    //- i.icon-lock.icon-white
+                    | LOGIN
+                //- button#btn-logout.btn.btn-warning
+                //-     //- i.icon-lock.icon-white
+                //-     | RESTAURANT
