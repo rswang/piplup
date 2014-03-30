@@ -1,2 +1,4 @@
 .DS_Store
-/nodetest1/data
+nodetest1/data
+login/node_modules
+login/data
